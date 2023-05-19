@@ -33,6 +33,43 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "createUserCounter",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "counter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "incrementUserCounter",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "counter",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -50,6 +87,6 @@
     }
   ],
   "metadata": {
-    "address": "21spMzeE6F9r651WBWSJdJS4X6R59jPrTxPdFtVa5y16"
+    "address": "4AK9rQH7e9NoduAwu6vtbCkbYPkEnYJsPdrs3ATPhwKJ"
   }
 }

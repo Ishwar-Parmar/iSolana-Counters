@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-counter_anchor = "21spMzeE6F9r651WBWSJdJS4X6R59jPrTxPdFtVa5y16"
+counter_anchor = "4AK9rQH7e9NoduAwu6vtbCkbYPkEnYJsPdrs3ATPhwKJ"
 
 [registry]
 url = "https://api.apr.dev"

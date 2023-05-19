@@ -1,29 +1,28 @@
-import { Connection, PublicKey, Keypair } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey, SystemProgram } from '@solana/web3.js';
 
-// Initialize connection to the Solana network
-const connection = new Connection("https://api.devnet.solana.com");
+// Initialize a connection to the Solana network
+const connection = new Connection('https://api.solana.com');
 
-// Set the public key of the Solana account that holds the counter data
-const counterPublicKey = new PublicKey("...");
+// Create a keypair for the account to be closed
+const accountKeypair = Keypair.fromSecretKey(accountSecretKey);
 
-// Create a new transaction instruction to call the initialize_counter function
-const initializeCounterInstruction = new TransactionInstruction({
-    keys: [
-        { pubkey: counterPublicKey, isSigner: false, isWritable: true },
-    ],
-    programId: new PublicKey("..."), // Replace the ellipsis with the public key of your Solana contract
-    data: Buffer.from([]), // The initialize_counter function does not require any input data
-});
+// Specify the destination public key to receive the remaining lamports
+const destinationPublicKey = new PublicKey(destinationPublicKeyStr);
 
-// Create a new transaction object
-const transaction = new Transaction().add(initializeCounterInstruction);
+// Specify the programId associated with the account
+const programId = new PublicKey(programIdStr);
 
-// Initialize the context object with the counter account
-const context = {
-    accounts: {
-        counter: counterPublicKey,
-    },
-};
+// Create a transaction to close the account
+const transaction = new Transaction().add(
+  SystemProgram.closeAccount({
+    accountPubkey: accountKeypair.publicKey,
+    destination: destinationPublicKey,
+    programId,
+  })
+);
 
 // Sign and send the transaction
-await connection.sendTransaction(transaction, [signer], { preflightCommitment: "singleGossip" }, context);
+const signature = await connection.sendTransaction(transaction, [accountKeypair]);
+
+// Wait for confirmation
+await connection.confirmTransaction(signature);
